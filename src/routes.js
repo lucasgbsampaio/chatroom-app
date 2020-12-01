@@ -1,7 +1,7 @@
 import express from 'express';
 
-const router = express.Router();
+const routes = express.Router();
 
-router.get('/', function (req, res) {});
+routes.get('/', function (req, res) {});
 
 export default routes;
