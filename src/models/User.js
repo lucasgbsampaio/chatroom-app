@@ -21,4 +21,11 @@ export default class User extends Model {
       }
     );
   }
+  static associate(models) {
+    this.belongsToMany(models.ChatRoom, {
+      foreignKey: 'user_id',
+      through: 'user_chatrooms',
+      as: 'chatrooms',
+    });
+  }
 }
