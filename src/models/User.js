@@ -18,6 +18,7 @@ export default class User extends Model {
           },
         },
         sequelize,
+        tableName: 'users',
       }
     );
   }
@@ -25,7 +26,12 @@ export default class User extends Model {
     this.belongsToMany(models.ChatRoom, {
       foreignKey: 'user_id',
       through: 'user_chatrooms',
-      as: 'chatrooms',
+    });
+    this.hasMany(models.Message, {
+      foreignKey: 'user_from_id',
+    });
+    this.hasMany(models.Message, {
+      foreignKey: 'user_to_id',
     });
   }
 }

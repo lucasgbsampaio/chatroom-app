@@ -22,10 +22,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'client', 'build')));
 app.use(bodyParser.json());
 app.use('/api', routes);
-app.use('*', (req, res) => {
+/* app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
-
+ */
 io.on('connection', WebSockets.connection);
 
 server.listen(process.env.PORT || 8080, () => console.log('Server iniciado'));

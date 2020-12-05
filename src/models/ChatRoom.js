@@ -7,10 +7,10 @@ export default class ChatRoom extends Model {
     super.init(
       {
         name: DataTypes.STRING,
-        password: DataTypes.STRING,
       },
       {
         sequelize,
+        tableName: 'chatrooms',
       }
     );
   }
@@ -18,7 +18,9 @@ export default class ChatRoom extends Model {
     this.belongsToMany(models.User, {
       foreignKey: 'chatroom_id',
       through: 'user_chatrooms',
-      as: 'users',
+    });
+    this.hasMany(models.Message, {
+      foreignKey: 'chat_id',
     });
   }
 }
