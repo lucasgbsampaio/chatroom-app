@@ -6,7 +6,7 @@ export default class Message extends Model {
   static init(sequelize) {
     super.init(
       {
-        text_message: DataTypes.STRING,
+        message_text: DataTypes.STRING,
       },
       {
         sequelize,

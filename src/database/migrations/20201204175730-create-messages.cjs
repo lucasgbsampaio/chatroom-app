@@ -17,9 +17,9 @@ module.exports = {
         onDelete: 'CASCADE',
       },
       sender_user: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
-        references: { model: 'users', key: 'id' },
+        references: { model: 'users', key: 'username' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
