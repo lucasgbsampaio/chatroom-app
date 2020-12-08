@@ -9,9 +9,9 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
-      name: {
-        type: Sequelize.STRING,
-        defaultValue: '',
+      participants_id: {
+        type: Sequelize.ARRAY(Sequelize.INTEGER),
+        allowNull: false,
       },
       created_at: {
         type: Sequelize.DATE,

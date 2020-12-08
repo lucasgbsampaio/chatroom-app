@@ -6,7 +6,7 @@ export default class ChatRoom extends Model {
   static init(sequelize) {
     super.init(
       {
-        name: DataTypes.STRING,
+        participants_id: DataTypes.ARRAY(DataTypes.INTEGER),
       },
       {
         sequelize,

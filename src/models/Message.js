@@ -6,7 +6,7 @@ export default class Message extends Model {
   static init(sequelize) {
     super.init(
       {
-        body: DataTypes.STRING,
+        text_message: DataTypes.STRING,
       },
       {
         sequelize,
@@ -18,11 +18,8 @@ export default class Message extends Model {
     this.belongsTo(models.ChatRoom, {
       foreignKey: 'chat_id',
     });
-    this.belongsTo(models.ChatRoom, {
-      foreignKey: 'user_to_id',
-    });
-    this.belongsTo(models.ChatRoom, {
-      foreignKey: 'user_from_id',
+    this.belongsTo(models.User, {
+      foreignKey: 'sender_user',
     });
   }
 }

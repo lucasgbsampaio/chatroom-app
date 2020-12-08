@@ -9,8 +9,9 @@ const routes = express.Router();
 routes.post('/register', AuthController.register);
 routes.post('/login', AuthController.login);
 
-routes.post('/chatroom', ChatController.chatroom);
-routes.post('/message', ChatController.message);
+routes.post('/new-chatroom', ChatController.createChatRoom);
+routes.post('/new-message', ChatController.createMessage);
+routes.get('/messages', ChatController.getMessages);
 
 routes.use(authMiddleware);
 

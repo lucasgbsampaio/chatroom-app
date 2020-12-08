@@ -28,10 +28,7 @@ export default class User extends Model {
       through: 'user_chatrooms',
     });
     this.hasMany(models.Message, {
-      foreignKey: 'user_from_id',
-    });
-    this.hasMany(models.Message, {
-      foreignKey: 'user_to_id',
+      foreignKey: 'sender_user',
     });
   }
 }
