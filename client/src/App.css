@@ -1,0 +1,18 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #0d1017;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body,
+input,
+button,
+textarea,
+a {
+  color: #fff;
+  font: 400 16px 'Andika New Basic', sans-serif;
+}
