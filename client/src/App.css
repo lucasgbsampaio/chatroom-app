@@ -2,6 +2,10 @@ body {
   width: 100vw;
   height: 100vh;
   background-color: #0d1017;
+}
+
+.wrapper {
+  height: 100vh;
 
   display: flex;
   align-items: center;
