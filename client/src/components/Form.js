@@ -84,7 +84,7 @@ export default function Form({ type }) {
           <button>{type}</button>
         )}
 
-        {error && 'Error'}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </form>
 
       {type === 'Entrar' ? (
