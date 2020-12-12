@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ALL_USERS } from '../services/api';
+import searchIcon from '../assets/search-icon.svg';
 
 import style from './ChatRoom.module.css';
 
@@ -42,6 +43,7 @@ export default function ChatRoom() {
 
           <div className={style.mainContentLeftSide}>
             <div className={style.containerInput}>
+              <img src={searchIcon} alt="search" />
               <input
                 type="text"
                 id="user"
@@ -50,14 +52,19 @@ export default function ChatRoom() {
                 onChange={({ target }) => {
                   setUser(target.value);
                 }}
+                placeholder="Procurar ou começar uma nova conversa..."
               />
             </div>
 
-            <div onClick={handleClick} className={style.users}>
+            <div className={style.users}>
               {users &&
                 users.users.map((user) => {
                   return (
-                    <div className={style.userContent} id={user.id}>
+                    <div
+                      onClick={handleClick}
+                      className={style.userContent}
+                      id={user.id}
+                    >
                       <div className={style.letter}>{user.username[0]}</div>
                       <span className={style.name}>{user.username}</span>
                     </div>
