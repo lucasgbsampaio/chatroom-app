@@ -50,6 +50,13 @@ export default function Form({ type }) {
     }
   }
 
+  React.useEffect(() => {
+    return () => {
+      setError(null);
+      setLoading(false);
+    };
+  }, []);
+
   return (
     <div className={style.container}>
       <h1>ChatApp</h1>

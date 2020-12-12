@@ -12,5 +12,6 @@ routes.post('/login', AuthController.login);
 routes.use(authMiddleware);
 routes.post('/chatroom/:id', ChatController.newChatRoomAndDisplayMessages);
 routes.post('/message/:id', ChatController.createMessage);
+routes.get('/all-users', ChatController.showUsers);
 
 export default routes;

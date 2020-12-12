@@ -3,6 +3,7 @@ import Sequelize from 'sequelize';
 import User from '../models/User.js';
 import ChatRoom from '../models/ChatRoom.js';
 import Message from '../models/Message.js';
+import sequelize from 'sequelize';
 
 export default {
   async newChatRoomAndDisplayMessages(req, res) {
@@ -62,6 +63,21 @@ export default {
       return res.status(200).json(message);
     } catch (error) {
       return res.status(400).json({ error: 'Erro ao enviar Mensagem' });
+    }
+  },
+
+  async showUsers(req, res) {
+    try {
+      const user = await User.findByPk(req.userId);
+
+      const users = await User.findAll({
+        attributes: { exclude: ['password'] },
+        where: { id: { [sequelize.Op.not]: req.userId } },
+      });
+
+      return res.status(200).json({ user: user.username, users });
+    } catch (error) {
+      return res.status(400).json({ error: 'Erro ao listar Usuários' });
     }
   },
 };

@@ -1,0 +1,68 @@
+.container {
+  width: 1200px;
+  height: 800px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.leftSide {
+  background-color: #161b21;
+  flex: 30%;
+  border-right: 1px solid #3b4347;
+}
+
+.rightSide {
+  background-color: #21262c;
+  flex: 70%;
+}
+
+.topContainer {
+  background-color: #2a2f31;
+  padding: 15px;
+}
+
+.letter {
+  border-radius: 50%;
+  padding: 0px 10px;
+  background-color: #21262c;
+  display: inline-block;
+  text-transform: capitalize;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  margin-right: 7px;
+}
+
+.name {
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.mainContentLeftSide {
+  border-top: 1px solid #30383d;
+  cursor: pointer;
+}
+
+.containerInput {
+  padding: 10px 15px;
+  border-bottom: 1px solid #30383d;
+}
+
+.containerInput input {
+  background-color: #2a2f31;
+  border-style: none;
+  border-radius: 10px;
+  width: 100%;
+  padding: 5px;
+}
+
+.users {
+  padding: 0px 15px;
+}
+
+.userContent {
+  margin: 10px 0;
+  padding-bottom: 11px;
+  border-bottom: 1px solid #30383d9d;
+}

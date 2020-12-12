@@ -25,3 +25,16 @@ export function USER_LOGIN(body) {
     },
   };
 }
+
+export function ALL_USERS() {
+  return {
+    url: API_URL + '/all-users',
+    options: {
+      method: 'GET',
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      },
+      cache: 'no-store',
+    },
+  };
+}
