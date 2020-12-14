@@ -75,7 +75,14 @@ export default function ChatRoom() {
         </div>
 
         <div className={style.rightSide}>
-          {showMessages && (
+          {!showMessages ? (
+            <div className={style.homeMessage}>
+              <div>
+                <h2>Comece uma nova conversa</h2>
+                <span>Clique em algum usuário ao lado esquerdo.</span>
+              </div>
+            </div>
+          ) : (
             <form onSubmit={handleSubmit}>
               <textarea
                 name="message"

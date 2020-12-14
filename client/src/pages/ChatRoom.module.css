@@ -78,6 +78,21 @@
 
 .users {
   padding: 0px 15px;
+  overflow-y: auto;
+  z-index: 1;
+  height: 100%;
+  max-height: 680px;
+}
+
+.users::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.users::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-color: hsla(0, 0%, 100%, 0.16);
 }
 
 .userContent {
@@ -85,4 +100,15 @@
   padding-bottom: 11px;
   border-bottom: 1px solid #30383d7a;
   cursor: pointer;
+}
+
+.homeMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.homeMessage div {
+  text-align: center;
 }
