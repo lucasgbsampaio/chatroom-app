@@ -23,13 +23,15 @@
 
 .letter {
   border-radius: 50%;
-  padding: 0px 10px;
+  width: 32px;
+  height: 32px;
   background-color: #21262c;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   text-transform: capitalize;
   font-size: 20px;
   font-weight: 500;
-  text-align: center;
   margin-right: 7px;
 }
 
@@ -77,11 +79,11 @@
 }
 
 .users {
-  padding: 0px 15px;
   overflow-y: auto;
   z-index: 1;
   height: 100%;
   max-height: 680px;
+  padding: 0 15px;
 }
 
 .users::-webkit-scrollbar {
@@ -111,4 +113,19 @@
 
 .homeMessage div {
   text-align: center;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.headerChat {
+  background-color: #2a2f31;
+  width: 100%;
+  padding: 15px;
+  border-bottom: 1px solid #30383d;
 }
