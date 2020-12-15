@@ -75,7 +75,9 @@ export default {
         where: { id: { [sequelize.Op.not]: req.userId } },
       });
 
-      return res.status(200).json({ user: user.username, users });
+      return res
+        .status(200)
+        .json({ user: user.username, userId: user.id, users });
     } catch (error) {
       return res.status(400).json({ error: 'Erro ao listar Usuários' });
     }

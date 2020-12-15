@@ -38,3 +38,30 @@ export function ALL_USERS() {
     },
   };
 }
+
+export function DISPLAY_CHATROOM(id) {
+  return {
+    url: API_URL + '/chatroom/' + id,
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+    },
+  };
+}
+
+export function NEW_MESSAGE(id, body) {
+  return {
+    url: API_URL + '/message/' + id,
+    options: {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}

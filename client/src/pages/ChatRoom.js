@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ALL_USERS } from '../services/api';
+import { ALL_USERS, DISPLAY_CHATROOM, NEW_MESSAGE } from '../services/api';
 import searchIcon from '../assets/search-icon.svg';
 import send from '../assets/send.svg';
 
@@ -12,11 +12,11 @@ export default function ChatRoom() {
   const [showMessages, setShowMessages] = React.useState(false);
   const [user, setUser] = React.useState(null);
   const [users, setUsers] = React.useState(null);
+  const [chatId, setChatId] = React.useState(null);
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-    console.log(message);
-    setMessage('');
+  function handleClick(event) {
+    setUser(JSON.parse(event.currentTarget.dataset.user));
+    setShowMessages(true);
   }
 
   function handleKeyPress(event) {
@@ -26,9 +26,19 @@ export default function ChatRoom() {
     }
   }
 
-  async function handleClick(event) {
-    setUser(JSON.parse(event.currentTarget.dataset.user));
-    setShowMessages(true);
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (chatId) {
+      const { url, options } = NEW_MESSAGE(users && users.userId, {
+        message_text: message,
+        chat_id: chatId.id,
+      });
+      const res = await fetch(url, options);
+      const json = await res.json();
+      console.log(json);
+    }
+
+    setMessage('');
   }
 
   React.useEffect(() => {
@@ -36,11 +46,26 @@ export default function ChatRoom() {
       const { url, options } = ALL_USERS();
       const res = await fetch(url, options);
       const json = await res.json();
+
       setUsers(json);
     }
 
     getUsers();
   }, []);
+
+  React.useEffect(() => {
+    async function displayChatRoom() {
+      if (user) {
+        const { url, options } = DISPLAY_CHATROOM(user.id);
+        const res = await fetch(url, options);
+        const json = await res.json();
+
+        setChatId({ id: json.id });
+      }
+    }
+
+    displayChatRoom();
+  }, [user]);
 
   return (
     <div className="wrapper">
