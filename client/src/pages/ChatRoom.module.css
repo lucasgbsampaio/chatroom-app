@@ -129,3 +129,56 @@
   padding: 15px;
   border-bottom: 1px solid #30383d;
 }
+
+.conversation {
+}
+
+.messageBox {
+  background-color: #1f2428;
+  padding: 15px 5px;
+  width: 100%;
+}
+
+.messageBox form {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.messageBox textarea {
+  background-color: #33383b;
+  resize: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px;
+  font-size: 15px;
+}
+
+.messageBox textarea::placeholder {
+  font-size: 14px;
+}
+
+.messageBox textarea::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+.messageBox textarea::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background-color: hsla(0, 0%, 100%, 0.16);
+}
+
+.messageBox button {
+  background-color: #1f2428;
+  border: none;
+  padding: 0px;
+}
+
+.sendIcon {
+  width: 32px;
+  height: 36px;
+}

@@ -2,23 +2,31 @@ import React from 'react';
 
 import { ALL_USERS } from '../services/api';
 import searchIcon from '../assets/search-icon.svg';
+import send from '../assets/send.svg';
 
 import style from './ChatRoom.module.css';
 
 export default function ChatRoom() {
   const [message, setMessage] = React.useState('');
-  const [showMessages, setShowMessages] = React.useState(false);
-  const [users, setUsers] = React.useState(null);
   const [userFiltered, setUserFiltered] = React.useState('');
+  const [showMessages, setShowMessages] = React.useState(false);
   const [user, setUser] = React.useState(null);
-  const [activeUser, setActiveUser] = React.useState(false);
+  const [users, setUsers] = React.useState(null);
 
   async function handleSubmit(event) {
     event.preventDefault();
+    console.log(message);
+    setMessage('');
+  }
+
+  function handleKeyPress(event) {
+    if (event.keyCode === 13 && event.shiftKey === false) {
+      event.preventDefault();
+      handleSubmit(event);
+    }
   }
 
   async function handleClick(event) {
-    setActiveUser(!activeUser);
     setUser(JSON.parse(event.currentTarget.dataset.user));
     setShowMessages(true);
   }
@@ -100,20 +108,24 @@ export default function ChatRoom() {
                 </div>
               </div>
 
-              <div className={style.conversation}>B</div>
+              <div className={style.conversation}></div>
 
               <div className={style.messageBox}>
                 <form onSubmit={handleSubmit}>
                   <textarea
                     name="message"
                     id="message"
-                    cols="30"
-                    rows="10"
+                    cols="90"
+                    rows="1"
+                    placeholder="Digite uma mensagem"
                     value={message}
                     onChange={({ target }) => setMessage(target.value)}
+                    onKeyDown={handleKeyPress}
                   ></textarea>
 
-                  <button>ENVIAR</button>
+                  <button type="submit">
+                    <img className={style.sendIcon} src={send} alt="send" />
+                  </button>
                 </form>
               </div>
             </div>
