@@ -1,4 +1,5 @@
 import React from 'react';
+import io from 'socket.io-client';
 
 import { ALL_USERS, DISPLAY_CHATROOM, NEW_MESSAGE } from '../services/api';
 import searchIcon from '../assets/search-icon.svg';
@@ -66,6 +67,15 @@ export default function ChatRoom() {
 
     displayChatRoom();
   }, [user]);
+
+  React.useEffect(() => {
+    const socket = io('http://localhost:8080', {
+      withCredentials: true,
+      extraHeaders: {
+        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
+      },
+    });
+  }, []);
 
   return (
     <div className="wrapper">
