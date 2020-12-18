@@ -19,8 +19,6 @@ const io = new Server(server, {
   cors: {
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Authorization'],
-    credentials: true,
   },
 });
 
@@ -33,6 +31,6 @@ app.use('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
-io.on('connection', WebSockets.connection);
+WebSockets(io);
 
 server.listen(process.env.PORT || 8080, () => console.log('Server iniciado'));

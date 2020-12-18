@@ -14,6 +14,7 @@ export default function ChatRoom() {
   const [user, setUser] = React.useState(null);
   const [users, setUsers] = React.useState(null);
   const [chatId, setChatId] = React.useState(null);
+  const [socket, setSocket] = React.useState(null);
 
   function handleClick(event) {
     setUser(JSON.parse(event.currentTarget.dataset.user));
@@ -29,18 +30,31 @@ export default function ChatRoom() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (chatId) {
+    if (chatId && socket) {
+      socket.emit('chatroomMessage', {
+        chatId,
+        message,
+      });
+    }
+
+    /* if (chatId) {
       const { url, options } = NEW_MESSAGE(users && users.userId, {
         message_text: message,
         chat_id: chatId.id,
       });
       const res = await fetch(url, options);
       const json = await res.json();
-      console.log(json);
     }
-
+ */
     setMessage('');
   }
+
+  React.useEffect(() => {
+    if (!socket) {
+      const newSocket = io('http://localhost:8080');
+      setSocket(newSocket);
+    }
+  }, [socket]);
 
   React.useEffect(() => {
     async function getUsers() {
@@ -60,22 +74,33 @@ export default function ChatRoom() {
         const { url, options } = DISPLAY_CHATROOM(user.id);
         const res = await fetch(url, options);
         const json = await res.json();
-
-        setChatId({ id: json.id });
+        if (json.id) {
+          setChatId({ id: json.id });
+        } else {
+          const user = json[0];
+          setChatId({ id: user.chat_id });
+        }
       }
     }
 
     displayChatRoom();
-  }, [user]);
+  }, [user, socket]);
 
   React.useEffect(() => {
-    const socket = io('http://localhost:8080', {
-      withCredentials: true,
-      extraHeaders: {
-        Authorization: 'Bearer ' + window.localStorage.getItem('token'),
-      },
-    });
-  }, []);
+    if (socket && chatId) socket.emit('joinRoom', chatId.id);
+
+    return () => {
+      if (socket && chatId) socket.emit('leaveRoom', chatId.id);
+    };
+  }, [socket, chatId]);
+
+  React.useEffect(() => {
+    if (socket) {
+      socket.on('newMessage', (message) => {
+        console.log(message);
+      });
+    }
+  }, [socket]);
 
   return (
     <div className="wrapper">
