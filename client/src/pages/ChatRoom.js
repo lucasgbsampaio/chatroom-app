@@ -11,10 +11,12 @@ export default function ChatRoom() {
   const [message, setMessage] = React.useState('');
   const [userFiltered, setUserFiltered] = React.useState('');
   const [showMessages, setShowMessages] = React.useState(false);
+  const [loadingMessages, setLoadingMessages] = React.useState(false);
   const [user, setUser] = React.useState(null);
   const [users, setUsers] = React.useState(null);
   const [chatId, setChatId] = React.useState(null);
   const [socket, setSocket] = React.useState(null);
+  const [allMessages, setAllMessages] = React.useState(null);
 
   function handleClick(event) {
     setUser(JSON.parse(event.currentTarget.dataset.user));
@@ -31,22 +33,18 @@ export default function ChatRoom() {
   async function handleSubmit(event) {
     event.preventDefault();
     if (chatId && socket) {
-      socket.emit('chatroomMessage', {
-        chatId,
-        message,
-      });
+      socket.emit('chatroomMessage', chatId.id, message);
     }
+    const message_text = message;
+    setMessage('');
 
-    /* if (chatId) {
+    if (chatId) {
       const { url, options } = NEW_MESSAGE(users && users.userId, {
-        message_text: message,
+        message_text,
         chat_id: chatId.id,
       });
-      const res = await fetch(url, options);
-      const json = await res.json();
+      await fetch(url, options);
     }
- */
-    setMessage('');
   }
 
   React.useEffect(() => {
@@ -71,20 +69,24 @@ export default function ChatRoom() {
   React.useEffect(() => {
     async function displayChatRoom() {
       if (user) {
+        setLoadingMessages(true);
         const { url, options } = DISPLAY_CHATROOM(user.id);
         const res = await fetch(url, options);
         const json = await res.json();
+
         if (json.id) {
           setChatId({ id: json.id });
         } else {
           const user = json[0];
           setChatId({ id: user.chat_id });
+          setLoadingMessages(false);
+          setAllMessages(json);
         }
       }
     }
 
     displayChatRoom();
-  }, [user, socket]);
+  }, [socket, user]);
 
   React.useEffect(() => {
     if (socket && chatId) socket.emit('joinRoom', chatId.id);
@@ -97,10 +99,20 @@ export default function ChatRoom() {
   React.useEffect(() => {
     if (socket) {
       socket.on('newMessage', (message) => {
-        console.log(message);
+        const newMessage = {
+          id: Math.floor(Math.random() * 65536),
+          message_text: message,
+          sender_user: users && users.user,
+        };
+
+        if (!allMessages) {
+          setAllMessages([newMessage]);
+        } else {
+          setAllMessages([...allMessages, newMessage]);
+        }
       });
     }
-  }, [socket]);
+  }, [socket, allMessages, users]);
 
   return (
     <div className="wrapper">
@@ -168,7 +180,20 @@ export default function ChatRoom() {
                 </div>
               </div>
 
-              <div className={style.conversation}></div>
+              <div className={style.conversation}>
+                {loadingMessages ? (
+                  <span>Carregando...</span>
+                ) : (
+                  allMessages &&
+                  allMessages.map((message) => {
+                    return (
+                      <div key={message.id} className={style.messageContainer}>
+                        <div>{message.message_text}</div>
+                      </div>
+                    );
+                  })
+                )}
+              </div>
 
               <div className={style.messageBox}>
                 <form onSubmit={handleSubmit}>

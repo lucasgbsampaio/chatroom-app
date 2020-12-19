@@ -132,12 +132,31 @@
 }
 
 .conversation {
+  height: 100%;
+  width: 100%;
+  padding: 20px 60px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+.conversation::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.conversation::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
+  background-color: hsla(0, 0%, 100%, 0.16);
 }
 
 .messageBox {
+  border-top: 1px solid #30383db2;
   background-color: #1f2428;
   padding: 15px 5px;
   width: 100%;
+  z-index: 1;
 }
 
 .messageBox form {
