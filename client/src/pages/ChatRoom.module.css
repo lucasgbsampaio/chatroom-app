@@ -134,7 +134,7 @@
 .conversation {
   height: 100%;
   width: 100%;
-  padding: 20px 60px;
+  padding: 10px 60px;
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 1;
@@ -149,6 +149,53 @@
   -webkit-border-radius: 6px;
   border-radius: 6px;
   background-color: hsla(0, 0%, 100%, 0.16);
+}
+
+.messageContainer {
+  margin-bottom: 6px;
+  display: flex;
+  flex-direction: column;
+  color: rgba(241, 241, 242, 0.95);
+}
+
+.messageInContainer,
+.messageOutContainer {
+  align-self: flex-start;
+  max-width: 60%;
+  font-size: 15px;
+  line-height: 19px;
+  word-break: break-word;
+}
+
+.messageOutContainer {
+  align-self: flex-end;
+}
+
+.messageIn,
+.messageOut {
+  background-color: #262d31;
+  border-radius: 7px;
+  position: relative;
+  z-index: 200;
+}
+
+.messageOut {
+  background-color: #027da9;
+}
+
+.textMessage {
+  padding: 6px 7px 8px 9px;
+  box-sizing: border-box;
+  line-height: 22px;
+}
+
+.textMessage div {
+  display: block;
+}
+
+.textMessageName {
+  display: inline-flex;
+  max-width: 100%;
 }
 
 .messageBox {

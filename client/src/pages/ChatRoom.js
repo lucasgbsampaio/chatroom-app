@@ -150,7 +150,7 @@ export default function ChatRoom() {
                       className={style.userContent}
                       style={{
                         borderBottomColor:
-                          user && userr.id === user.id && '#f9826c',
+                          user && userr.id === user.id && '#fb8500',
                       }}
                       data-user={JSON.stringify(userr)}
                     >
@@ -188,7 +188,35 @@ export default function ChatRoom() {
                   allMessages.map((message) => {
                     return (
                       <div key={message.id} className={style.messageContainer}>
-                        <div>{message.message_text}</div>
+                        {users && message.sender_user === users.user ? (
+                          <div className={style.messageOutContainer}>
+                            <span></span>
+                            <div className={style.messageOut}>
+                              <div className={style.textMessage}>
+                                <div>{message.message_text}</div>
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className={style.messageInContainer}>
+                            <span></span>
+                            <div className={style.messageIn}>
+                              <div className={style.textMessage}>
+                                <div className={style.textMessageName}>
+                                  <span
+                                    style={{
+                                      color: '#ffc600',
+                                      fontSize: '14px',
+                                    }}
+                                  >
+                                    {message.sender_user}
+                                  </span>
+                                  <div>{message.message_text}</div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     );
                   })
