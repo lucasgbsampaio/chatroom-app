@@ -12,7 +12,7 @@
 }
 
 .rightSide {
-  background-color: #21262c;
+  background-color: #020c18ce;
   flex: 70%;
 }
 
@@ -151,8 +151,16 @@
   background-color: hsla(0, 0%, 100%, 0.16);
 }
 
+.spinner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffc600;
+}
+
 .messageContainer {
-  margin-bottom: 6px;
+  margin-bottom: 4px;
   display: flex;
   flex-direction: column;
   color: rgba(241, 241, 242, 0.95);
@@ -161,7 +169,7 @@
 .messageInContainer,
 .messageOutContainer {
   align-self: flex-start;
-  max-width: 60%;
+  max-width: 55%;
   font-size: 15px;
   line-height: 19px;
   word-break: break-word;
@@ -173,14 +181,14 @@
 
 .messageIn,
 .messageOut {
-  background-color: #262d31;
+  background-color: #111116c0;
   border-radius: 7px;
   position: relative;
   z-index: 200;
 }
 
 .messageOut {
-  background-color: #027da9;
+  background-color: #0a618aab;
 }
 
 .textMessage {

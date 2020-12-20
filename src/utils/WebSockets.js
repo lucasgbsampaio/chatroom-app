@@ -8,16 +8,13 @@ const socketEvents = (io) => {
 
     socket.on('joinRoom', (chatroomId) => {
       socket.join(chatroomId);
-      console.log('A user joined chatroom: ' + chatroomId);
     });
 
     socket.on('leaveRoom', (chatroomId) => {
       socket.leave(chatroomId);
-      console.log('A user left chatroom: ' + chatroomId);
     });
 
     socket.on('chatroomMessage', async (chatroomId, message) => {
-      console.log(chatroomId, message);
       io.to(chatroomId).emit('newMessage', message);
     });
   });

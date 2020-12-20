@@ -18,6 +18,8 @@ export default function ChatRoom() {
   const [socket, setSocket] = React.useState(null);
   const [allMessages, setAllMessages] = React.useState(null);
 
+  const messagesEndRef = React.useRef(null);
+
   function handleClick(event) {
     setUser(JSON.parse(event.currentTarget.dataset.user));
     setShowMessages(true);
@@ -76,6 +78,8 @@ export default function ChatRoom() {
 
         if (json.id) {
           setChatId({ id: json.id });
+          setLoadingMessages(false);
+          setAllMessages(null);
         } else {
           const user = json[0];
           setChatId({ id: user.chat_id });
@@ -113,6 +117,12 @@ export default function ChatRoom() {
       });
     }
   }, [socket, allMessages, users]);
+
+  React.useEffect(() => {
+    if (allMessages) {
+      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    }
+  }, [allMessages]);
 
   return (
     <div className="wrapper">
@@ -180,9 +190,11 @@ export default function ChatRoom() {
                 </div>
               </div>
 
-              <div className={style.conversation}>
+              <div ref={messagesEndRef} className={style.conversation}>
                 {loadingMessages ? (
-                  <span>Carregando...</span>
+                  <div className={style.spinner}>
+                    <div className="spinner-border" role="status"></div>
+                  </div>
                 ) : (
                   allMessages &&
                   allMessages.map((message) => {
@@ -190,7 +202,6 @@ export default function ChatRoom() {
                       <div key={message.id} className={style.messageContainer}>
                         {users && message.sender_user === users.user ? (
                           <div className={style.messageOutContainer}>
-                            <span></span>
                             <div className={style.messageOut}>
                               <div className={style.textMessage}>
                                 <div>{message.message_text}</div>
@@ -199,7 +210,6 @@ export default function ChatRoom() {
                           </div>
                         ) : (
                           <div className={style.messageInContainer}>
-                            <span></span>
                             <div className={style.messageIn}>
                               <div className={style.textMessage}>
                                 <div className={style.textMessageName}>
@@ -211,6 +221,7 @@ export default function ChatRoom() {
                                   >
                                     {message.sender_user}
                                   </span>
+
                                   <div>{message.message_text}</div>
                                 </div>
                               </div>
