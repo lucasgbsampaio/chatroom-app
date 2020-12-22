@@ -11,9 +11,11 @@ export default function ChatRoom() {
   const [message, setMessage] = React.useState('');
   const [userFiltered, setUserFiltered] = React.useState('');
   const [showMessages, setShowMessages] = React.useState(false);
+  const [loadingUsers, setLoadingUsers] = React.useState(false);
   const [loadingMessages, setLoadingMessages] = React.useState(false);
   const [user, setUser] = React.useState(null);
   const [users, setUsers] = React.useState(null);
+  const [filteredUsers, setFilteredUsers] = React.useState(null);
   const [chatId, setChatId] = React.useState(null);
   const [socket, setSocket] = React.useState(null);
   const [allMessages, setAllMessages] = React.useState(null);
@@ -37,6 +39,7 @@ export default function ChatRoom() {
     if (chatId && socket) {
       socket.emit('chatroomMessage', chatId.id, message);
     }
+
     const message_text = message;
     setMessage('');
 
@@ -45,6 +48,7 @@ export default function ChatRoom() {
         message_text,
         chat_id: chatId.id,
       });
+
       await fetch(url, options);
     }
   }
@@ -58,10 +62,13 @@ export default function ChatRoom() {
 
   React.useEffect(() => {
     async function getUsers() {
+      setLoadingUsers(true);
+
       const { url, options } = ALL_USERS();
       const res = await fetch(url, options);
       const json = await res.json();
 
+      setLoadingUsers(false);
       setUsers(json);
     }
 
@@ -69,9 +76,29 @@ export default function ChatRoom() {
   }, []);
 
   React.useEffect(() => {
+    if (users) {
+      const filteredUsers = users.users.filter((user) =>
+        user.username.toLocaleLowerCase().includes(userFiltered)
+      );
+
+      const { user, userId } = users;
+      const newUsers = {
+        user,
+        userId,
+        users: filteredUsers,
+      };
+
+      const allUsers = userFiltered.length > 0 ? newUsers : users;
+
+      setFilteredUsers(allUsers);
+    }
+  }, [userFiltered, users]);
+
+  React.useEffect(() => {
     async function displayChatRoom() {
       if (user) {
         setLoadingMessages(true);
+
         const { url, options } = DISPLAY_CHATROOM(user.id);
         const res = await fetch(url, options);
         const json = await res.json();
@@ -104,7 +131,6 @@ export default function ChatRoom() {
     if (socket) {
       socket.on('newMessage', (message) => {
         const newMessage = {
-          id: Math.floor(Math.random() * 65536),
           message_text: message,
           sender_user: users && users.user,
         };
@@ -119,9 +145,8 @@ export default function ChatRoom() {
   }, [socket, allMessages, users]);
 
   React.useEffect(() => {
-    if (allMessages) {
+    if (allMessages)
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-    }
   }, [allMessages]);
 
   return (
@@ -130,8 +155,16 @@ export default function ChatRoom() {
         <div className={style.leftSide}>
           <div className={style.topContainer}>
             <div className={style.avatar}>
-              <div className={style.letter}>{users && users.user[0]}</div>
-              <span className={style.name}>{users && users.user}</span>
+              {loadingUsers ? (
+                <div className={style.spinner}>
+                  <div className="spinner-border" role="status"></div>
+                </div>
+              ) : (
+                <div>
+                  <div className={style.letter}>{users && users.user[0]}</div>
+                  <span className={style.name}>{users && users.user}</span>
+                </div>
+              )}
             </div>
           </div>
 
@@ -147,12 +180,18 @@ export default function ChatRoom() {
                   setUserFiltered(target.value);
                 }}
                 placeholder="Procurar ou começar uma nova conversa..."
+                autoComplete="off"
               />
             </div>
 
             <div className={style.users}>
-              {users &&
-                users.users.map((userr) => {
+              {loadingUsers ? (
+                <div style={{ height: '50vh' }} className={style.spinner}>
+                  <div className="spinner-border" role="status"></div>
+                </div>
+              ) : (
+                filteredUsers &&
+                filteredUsers.users.map((userr) => {
                   return (
                     <div
                       onClick={handleClick}
@@ -168,7 +207,8 @@ export default function ChatRoom() {
                       <span className={style.name}>{userr.username}</span>
                     </div>
                   );
-                })}
+                })
+              )}
             </div>
           </div>
         </div>
@@ -197,9 +237,9 @@ export default function ChatRoom() {
                   </div>
                 ) : (
                   allMessages &&
-                  allMessages.map((message) => {
+                  allMessages.map((message, index) => {
                     return (
-                      <div key={message.id} className={style.messageContainer}>
+                      <div key={index} className={style.messageContainer}>
                         {users && message.sender_user === users.user ? (
                           <div className={style.messageOutContainer}>
                             <div className={style.messageOut}>
@@ -241,7 +281,7 @@ export default function ChatRoom() {
                     id="message"
                     cols="90"
                     rows="1"
-                    placeholder="Digite uma mensagem"
+                    placeholder="Digite uma mensagem..."
                     value={message}
                     onChange={({ target }) => setMessage(target.value)}
                     onKeyDown={handleKeyPress}
