@@ -17,6 +17,9 @@ export default {
     const { username, password } = req.body;
 
     try {
+      if (!username || !password) {
+        throw new Error();
+      }
       const result = await User.findOne({ where: { username } });
 
       if (result) {
@@ -40,6 +43,10 @@ export default {
     const { username, password } = req.body;
 
     try {
+      if (!username || !password) {
+        throw new Error();
+      }
+
       const user = await User.findOne({ where: { username } });
 
       if (!user) {
