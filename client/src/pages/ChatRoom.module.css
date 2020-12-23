@@ -1,6 +1,8 @@
 .container {
-  width: 1200px;
-  height: 800px;
+  width: 90%;
+  max-width: 1200px;
+  height: 100%;
+  max-height: 800px;
   display: flex;
   justify-content: flex-start;
 }
@@ -134,18 +136,25 @@
 .conversation {
   height: 100%;
   width: 100%;
-  padding: 10px 60px;
-  overflow-x: hidden;
-  overflow-y: auto;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.conversation::-webkit-scrollbar {
+.conversationWrapper {
+  max-height: 670px;
+  padding: 20px 60px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.conversationWrapper::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
-.conversation::-webkit-scrollbar-thumb {
+.conversationWrapper::-webkit-scrollbar-thumb {
   -webkit-border-radius: 6px;
   border-radius: 6px;
   background-color: hsla(0, 0%, 100%, 0.16);
@@ -160,7 +169,7 @@
 }
 
 .messageContainer {
-  margin-bottom: 4px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   color: rgba(241, 241, 242, 0.95);
@@ -230,6 +239,7 @@
   border-radius: 15px;
   padding: 5px 10px;
   font-size: 15px;
+  width: 90%;
 }
 
 .messageBox textarea::placeholder {
@@ -254,6 +264,33 @@
 }
 
 .sendIcon {
-  width: 32px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 1300px) {
+  .containerInput input::placeholder {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .containerInput {
+    display: none;
+  }
+  .container {
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .leftSide {
+    flex: 40%;
+  }
+  .rightSide {
+    flex: 60%;
+  }
+}
+
+@media (max-width: 600px) {
 }

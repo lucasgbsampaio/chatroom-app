@@ -36,14 +36,14 @@ export default function ChatRoom() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    if (chatId && socket) {
-      socket.emit('chatroomMessage', chatId.id, message);
-    }
+    if (message.length > 0 && chatId) {
+      if (socket) {
+        socket.emit('chatroomMessage', chatId.id, message);
+      }
 
-    const message_text = message;
-    setMessage('');
+      const message_text = message;
+      setMessage('');
 
-    if (chatId) {
       const { url, options } = NEW_MESSAGE(users && users.userId, {
         message_text,
         chat_id: chatId.id,
@@ -78,7 +78,9 @@ export default function ChatRoom() {
   React.useEffect(() => {
     if (users) {
       const filteredUsers = users.users.filter((user) =>
-        user.username.toLocaleLowerCase().includes(userFiltered)
+        user.username
+          .toLocaleLowerCase()
+          .includes(userFiltered.toLocaleLowerCase())
       );
 
       const { user, userId } = users;
@@ -230,48 +232,53 @@ export default function ChatRoom() {
                 </div>
               </div>
 
-              <div ref={messagesEndRef} className={style.conversation}>
-                {loadingMessages ? (
-                  <div className={style.spinner}>
-                    <div className="spinner-border" role="status"></div>
-                  </div>
-                ) : (
-                  allMessages &&
-                  allMessages.map((message, index) => {
-                    return (
-                      <div key={index} className={style.messageContainer}>
-                        {users && message.sender_user === users.user ? (
-                          <div className={style.messageOutContainer}>
-                            <div className={style.messageOut}>
-                              <div className={style.textMessage}>
-                                <div>{message.message_text}</div>
-                              </div>
-                            </div>
-                          </div>
-                        ) : (
-                          <div className={style.messageInContainer}>
-                            <div className={style.messageIn}>
-                              <div className={style.textMessage}>
-                                <div className={style.textMessageName}>
-                                  <span
-                                    style={{
-                                      color: '#ffc600',
-                                      fontSize: '14px',
-                                    }}
-                                  >
-                                    {message.sender_user}
-                                  </span>
-
+              <div
+                style={{ justifyContent: loadingMessages && 'center' }}
+                className={style.conversation}
+              >
+                <div ref={messagesEndRef} className={style.conversationWrapper}>
+                  {loadingMessages ? (
+                    <div className={style.spinner}>
+                      <div className="spinner-border" role="status"></div>
+                    </div>
+                  ) : (
+                    allMessages &&
+                    allMessages.map((message, index) => {
+                      return (
+                        <div key={index} className={style.messageContainer}>
+                          {users && message.sender_user === users.user ? (
+                            <div className={style.messageOutContainer}>
+                              <div className={style.messageOut}>
+                                <div className={style.textMessage}>
                                   <div>{message.message_text}</div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })
-                )}
+                          ) : (
+                            <div className={style.messageInContainer}>
+                              <div className={style.messageIn}>
+                                <div className={style.textMessage}>
+                                  <div className={style.textMessageName}>
+                                    <span
+                                      style={{
+                                        color: '#ffc600',
+                                        fontSize: '14px',
+                                      }}
+                                    >
+                                      {message.sender_user}
+                                    </span>
+
+                                    <div>{message.message_text}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
               </div>
 
               <div className={style.messageBox}>
