@@ -1,8 +1,7 @@
 .container {
   width: 90%;
   max-width: 1200px;
-  height: 100%;
-  max-height: 800px;
+  height: 90%;
   display: flex;
   justify-content: flex-start;
 }
@@ -10,12 +9,57 @@
 .leftSide {
   background-color: #161b21;
   flex: 30%;
+  height: 100%;
   border-right: 1px solid #3b4347;
+}
+
+.leftSideMobile {
+  display: none;
+  background-color: #161b21;
+}
+
+.menuBars {
+  height: 100%;
+  width: 35px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menuUsersOn {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+  z-index: 200;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #161b21;
+  position: fixed;
+  padding: 10px 35px;
+}
+
+.menuUsers {
+  display: none;
+}
+
+.menuClose {
+  width: 100%;
+  text-align: end;
+  font-size: 2rem;
+}
+
+.textUsers {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .rightSide {
   background-color: #020c18ce;
   flex: 70%;
+  height: 100%;
 }
 
 .topContainer {
@@ -45,6 +89,7 @@
 
 .mainContentLeftSide {
   border-top: 1px solid #30383d;
+  height: calc(100% - 62px);
 }
 
 .containerInput {
@@ -83,9 +128,8 @@
 .users {
   overflow-y: auto;
   z-index: 1;
-  height: 100%;
-  max-height: 680px;
   padding: 0 15px;
+  height: calc(100% - 57px);
 }
 
 .users::-webkit-scrollbar {
@@ -134,7 +178,7 @@
 }
 
 .conversation {
-  height: 100%;
+  height: calc(100% - 128px);
   width: 100%;
   z-index: 1;
   display: flex;
@@ -143,7 +187,7 @@
 }
 
 .conversationWrapper {
-  max-height: 670px;
+  height: 100%;
   padding: 20px 60px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -284,6 +328,9 @@
     width: 100%;
     max-width: 100%;
   }
+  .users {
+    height: 100%;
+  }
   .leftSide {
     flex: 40%;
   }
@@ -293,4 +340,29 @@
 }
 
 @media (max-width: 600px) {
+  .leftSide {
+    display: none;
+  }
+  .leftSideMobile {
+    display: flex;
+  }
+}
+
+@media (max-width: 460px) {
+  .messageInContainer,
+  .messageOutContainer {
+    font-size: 13.5px;
+    line-height: 16px;
+  }
+}
+
+@media (max-width: 370px) {
+  .homeMessage {
+    font-size: 14px;
+    padding: 10px;
+  }
+  .letter,
+  .name {
+    font-size: 16px;
+  }
 }

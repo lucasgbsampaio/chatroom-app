@@ -1,5 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
+import * as FaIcons from 'react-icons/fa';
+import * as AiIcons from 'react-icons/ai';
 
 import { ALL_USERS, DISPLAY_CHATROOM, NEW_MESSAGE } from '../services/api';
 import searchIcon from '../assets/search-icon.svg';
@@ -11,6 +13,7 @@ export default function ChatRoom() {
   const [message, setMessage] = React.useState('');
   const [userFiltered, setUserFiltered] = React.useState('');
   const [showMessages, setShowMessages] = React.useState(false);
+  const [showUsers, setShowUsers] = React.useState(false);
   const [loadingUsers, setLoadingUsers] = React.useState(false);
   const [loadingMessages, setLoadingMessages] = React.useState(false);
   const [user, setUser] = React.useState(null);
@@ -23,7 +26,8 @@ export default function ChatRoom() {
   const messagesEndRef = React.useRef(null);
 
   function handleClick(event) {
-    setUser(JSON.parse(event.currentTarget.dataset.user));
+    const userData = JSON.parse(event.currentTarget.dataset.user);
+    setUser(userData);
     setShowMessages(true);
   }
 
@@ -91,7 +95,6 @@ export default function ChatRoom() {
       };
 
       const allUsers = userFiltered.length > 0 ? newUsers : users;
-
       setFilteredUsers(allUsers);
     }
   }, [userFiltered, users]);
@@ -110,8 +113,8 @@ export default function ChatRoom() {
           setLoadingMessages(false);
           setAllMessages(null);
         } else {
-          const user = json[0];
-          setChatId({ id: user.chat_id });
+          const id = json[0].chat_id;
+          setChatId({ id });
           setLoadingMessages(false);
           setAllMessages(json);
         }
@@ -212,6 +215,46 @@ export default function ChatRoom() {
                 })
               )}
             </div>
+          </div>
+        </div>
+
+        {/* ajuste para parte Mobile */}
+        <div className={style.leftSideMobile}>
+          <div
+            className={style.menuBars}
+            onClick={() => setShowUsers(!showUsers)}
+          >
+            <FaIcons.FaBars />
+          </div>
+
+          <div className={showUsers ? style.menuUsersOn : style.menuUsers}>
+            <div
+              className={style.menuClose}
+              onClick={() => setShowUsers(!showUsers)}
+            >
+              <AiIcons.AiOutlineClose />
+            </div>
+
+            <div className={style.textUsers}>LISTA DE USUÁRIOS</div>
+
+            {users &&
+              users.users.map((userr) => {
+                return (
+                  <div
+                    onClick={handleClick}
+                    key={userr.id}
+                    className={style.userContent}
+                    style={{
+                      borderBottomColor:
+                        user && userr.id === user.id && '#fb8500',
+                    }}
+                    data-user={JSON.stringify(userr)}
+                  >
+                    <div className={style.letter}>{userr.username[0]}</div>
+                    <span className={style.name}>{userr.username}</span>
+                  </div>
+                );
+              })}
           </div>
         </div>
 
