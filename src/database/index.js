@@ -7,16 +7,10 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const connection = new Sequelize(
-  'postgres://goperoiyoyjeyx:0abad3db668f8ffc3b7c2ae592029743093114b01961aace9b27da5e0cfa1423@ec2-100-25-231-126.compute-1.amazonaws.com:5432/dauqq62rfnbvam',
-  {
-    dialect: 'postgres',
-    logging: false,
-    define: {
-      timestamps: true,
-      underscored: true,
-    },
-  }
+  isProduction ? dbConfig.production : dbConfig.development
 );
 
 User.init(connection);
