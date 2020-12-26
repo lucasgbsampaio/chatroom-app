@@ -14,6 +14,7 @@ module.exports = {
       underscored: true,
     },
   },
+
   production: {
     dialect: process.env.DB_DIALECT,
     url: process.env.DATABASE_URL,
