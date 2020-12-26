@@ -42,11 +42,7 @@ export default function ChatRoom() {
     event.preventDefault();
     if (message.length > 0 && chatId) {
       if (socket) {
-        socket.emit('chatroomMessage', {
-          chatId: chatId.id,
-          message,
-          user: users && users.user,
-        });
+        socket.emit('chatroomMessage', chatId.id, message, users && users.user);
       }
 
       const message_text = message;
@@ -138,7 +134,7 @@ export default function ChatRoom() {
 
   React.useEffect(() => {
     if (socket) {
-      socket.on('newMessage', ({ message_text, sender_user }) => {
+      socket.on('newMessage', (message_text, sender_user) => {
         const newMessage = {
           message_text,
           sender_user,
