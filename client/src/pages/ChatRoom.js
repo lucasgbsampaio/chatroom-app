@@ -154,6 +154,8 @@ export default function ChatRoom() {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   }, [allMessages]);
 
+  console.log(allMessages)
+
   return (
     <div className="wrapper">
       <div className={style.container}>
