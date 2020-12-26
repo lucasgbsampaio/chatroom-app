@@ -7,22 +7,18 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const isProduction = process.env.DATABASE_URL;
+const isProduction = process.env.NODE_ENV === 'production';
 
-const PRODUCTION_CONFIG =
-  (process.env.DATABASE_URL,
-  {
-    dialect: 'postgres',
-    logging: false,
-    define: {
-      timestamps: true,
-      underscored: true,
-    },
-  });
-
-const connection = new Sequelize(
-  isProduction ? PRODUCTION_CONFIG : dbConfig.development
-);
+const connection = !isProduction
+  ? new Sequelize(dbConfig.development)
+  : new Sequelize(process.env.DATABASE_URL, {
+      dialect: 'postgres',
+      logging: false,
+      define: {
+        timestamps: true,
+        underscored: true,
+      },
+    });
 
 console.log(connection);
 
