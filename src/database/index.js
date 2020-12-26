@@ -3,8 +3,15 @@ import dbConfig from '../config/database.cjs';
 import User from '../models/User.js';
 import ChatRoom from '../models/ChatRoom.js';
 import Message from '../models/Message.js';
+import dotenv from 'dotenv';
 
-const connection = new Sequelize(dbConfig);
+dotenv.config();
+
+const isProduction = process.env.NODE_ENV === 'production';
+
+const connection = new Sequelize(
+  isProduction ? dbConfig.production : dbConfig.development
+);
 
 User.init(connection);
 ChatRoom.init(connection);
