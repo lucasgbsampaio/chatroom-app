@@ -1,5 +1,7 @@
 require('dotenv').config();
 
+console.log('a');
+
 module.exports = {
   production: {
     dialect: 'postgres',
