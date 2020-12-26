@@ -20,14 +20,9 @@ const PRODUCTION_CONFIG =
     },
   });
 
-const connection = new Sequelize(process.env.DATABASE_URL, {
-  dialect: 'postgres',
-  logging: false,
-  define: {
-    timestamps: true,
-    underscored: true,
-  },
-});
+const connection = new Sequelize(
+  isProduction ? PRODUCTION_CONFIG : dbConfig.development
+);
 
 console.log(connection);
 
