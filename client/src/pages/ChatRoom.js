@@ -57,9 +57,16 @@ export default function ChatRoom() {
     }
   }
 
+  function scrollToBottom() {
+    const scrollHeight = messagesEndRef.current.scrollHeight;
+    const height = messagesEndRef.current.clientHeight;
+    const maxScrollTop = scrollHeight - height;
+    messagesEndRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+  }
+
   React.useEffect(() => {
     if (!socket) {
-      const newSocket = io('https://chat-pern.herokuapp.com');
+      const newSocket = io('https://chat-pern.herokuapp.com/');
       setSocket(newSocket);
     }
   }, [socket]);
@@ -145,13 +152,15 @@ export default function ChatRoom() {
         } else {
           setAllMessages([...allMessages, newMessage]);
         }
+        scrollToBottom();
       });
     }
   }, [socket, allMessages]);
 
   React.useEffect(() => {
-    if (allMessages)
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    if (allMessages) {
+      scrollToBottom();
+    }
   }, [allMessages]);
 
   return (
