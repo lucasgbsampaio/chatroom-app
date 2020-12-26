@@ -59,7 +59,7 @@ export default function ChatRoom() {
 
   React.useEffect(() => {
     if (!socket) {
-      const newSocket = io('http://localhost:5000');
+      const newSocket = io('https://chat-pern.herokuapp.com');
       setSocket(newSocket);
     }
   }, [socket]);

@@ -20,8 +20,6 @@ const connection = !isProduction
       },
     });
 
-console.log(connection);
-
 User.init(connection);
 ChatRoom.init(connection);
 Message.init(connection);
