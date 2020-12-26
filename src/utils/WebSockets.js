@@ -15,7 +15,7 @@ const socketEvents = (io) => {
     });
 
     socket.on('chatroomMessage', async (chatroomId, message) => {
-      io.to(chatroomId).emit('newMessage', message);
+      socket.broadcast.to(chatroomId).emit('newMessage', message);
     });
   });
 };
