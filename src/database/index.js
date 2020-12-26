@@ -10,6 +10,7 @@ dotenv.config();
 const isProduction = process.env.NODE_ENV === 'production';
 
 console.log(process.env.NODE_ENV);
+console.log(process.env.DATABASE_URL);
 const PRODUCTION_CONNECTION =
   (process.env.DATABASE_URL,
   {
