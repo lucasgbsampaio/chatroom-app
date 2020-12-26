@@ -59,7 +59,7 @@ export default function ChatRoom() {
 
   React.useEffect(() => {
     if (!socket) {
-      const newSocket = io('http://localhost:8080');
+      const newSocket = io('http://localhost:5000');
       setSocket(newSocket);
     }
   }, [socket]);

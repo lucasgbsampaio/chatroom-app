@@ -33,4 +33,4 @@ app.use('*', (req, res) => {
 
 WebSockets(io);
 
-server.listen(process.env.PORT || 8080, () => console.log('Server iniciado'));
+server.listen(process.env.PORT || 5000, () => console.log('Server iniciado'));
