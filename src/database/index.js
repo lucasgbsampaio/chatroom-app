@@ -7,9 +7,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-const connection = new Sequelize(isProduction ? dbConfig : null);
+const connection = new Sequelize(dbConfig.production);
 
 User.init(connection);
 ChatRoom.init(connection);
