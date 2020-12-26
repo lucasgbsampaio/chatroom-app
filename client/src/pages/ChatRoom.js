@@ -59,7 +59,7 @@ export default function ChatRoom() {
 
   React.useEffect(() => {
     if (!socket) {
-      const newSocket = io('https://chat-pern.herokuapp.com');
+      const newSocket = io('http://localhost:5000');
       setSocket(newSocket);
     }
   }, [socket]);
@@ -153,8 +153,6 @@ export default function ChatRoom() {
     if (allMessages)
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   }, [allMessages]);
-
-  console.log(allMessages);
 
   return (
     <div className="wrapper">

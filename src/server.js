@@ -17,7 +17,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://chat-pern.herokuapp.com',
+    origin: 'https://chat-pern.herokuapp.com/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
   },
 });
