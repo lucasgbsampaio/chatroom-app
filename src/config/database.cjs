@@ -17,6 +17,6 @@ module.exports = {
 
   production: {
     dialect: process.env.DB_DIALECT,
-    url: process.env.DATABASE_URL,
+    use_env_variable: 'DATABASE_URL',
   },
 };
