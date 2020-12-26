@@ -15,12 +15,7 @@ dotenv.config();
 const __dirname = path.resolve();
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
-  cors: {
-    origin: 'https://chat-pern.herokuapp.com/',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  },
-});
+const io = new Server(server);
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
