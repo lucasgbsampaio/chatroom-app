@@ -42,7 +42,11 @@ export default function ChatRoom() {
     event.preventDefault();
     if (message.length > 0 && chatId) {
       if (socket) {
-        socket.emit('chatroomMessage', chatId.id, message);
+        socket.emit('chatroomMessage', {
+          chatId: chatId.id,
+          message,
+          user: users && users.user,
+        });
       }
 
       const message_text = message;
@@ -134,10 +138,10 @@ export default function ChatRoom() {
 
   React.useEffect(() => {
     if (socket) {
-      socket.on('newMessage', (message) => {
+      socket.on('newMessage', ({ message_text, sender_user }) => {
         const newMessage = {
-          message_text: message,
-          sender_user: users && users.user,
+          message_text,
+          sender_user,
         };
 
         if (!allMessages) {
@@ -147,14 +151,14 @@ export default function ChatRoom() {
         }
       });
     }
-  }, [socket, allMessages, users]);
+  }, [socket, allMessages]);
 
   React.useEffect(() => {
     if (allMessages)
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
   }, [allMessages]);
 
-  console.log(allMessages)
+  console.log(allMessages);
 
   return (
     <div className="wrapper">

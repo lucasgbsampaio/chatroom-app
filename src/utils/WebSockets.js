@@ -14,8 +14,8 @@ const socketEvents = (io) => {
       socket.leave(chatroomId);
     });
 
-    socket.on('chatroomMessage', async (chatroomId, message) => {
-      socket.broadcast.to(chatroomId).emit('newMessage', message);
+    socket.on('chatroomMessage', async ({ chatroomId, message, user }) => {
+      io.to(chatroomId).emit('newMessage', { message, user });
     });
   });
 };
