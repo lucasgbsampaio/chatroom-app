@@ -36,7 +36,7 @@ export default {
       });
     } catch (error) {
       console.log(error);
-      res.status(400).send({ error: error });
+      res.status(400).send({ error });
     }
   },
 
