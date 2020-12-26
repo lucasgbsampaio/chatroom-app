@@ -10,7 +10,7 @@ dotenv.config();
 const isProduction = process.env.NODE_ENV === 'production';
 
 const PRODUCTION_CONFIG =
-  (`${process.env.DATABASE_URL}`,
+  (process.env.DATABASE_URL,
   {
     dialect: 'postgres',
     logging: false,
