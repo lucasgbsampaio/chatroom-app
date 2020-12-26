@@ -9,8 +9,19 @@ dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
+console.log(process.env.NODE_ENV);
+const PRODUCTION_CONNECTION =
+  (process.env.DATABASE_URL,
+  {
+    dialect: 'postgres',
+    protocol: 'postgres',
+    dialectOptions: {
+      ssl: true,
+    },
+  });
+
 const connection = new Sequelize(
-  isProduction ? dbConfig.production : dbConfig.development
+  isProduction ? PRODUCTION_CONNECTION : dbConfig
 );
 
 User.init(connection);
