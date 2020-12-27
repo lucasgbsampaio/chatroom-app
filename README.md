@@ -35,7 +35,7 @@
 <!--ts-->
 
 - [Sobre o projeto](#-sobre-o-projeto)
-- [Funcionalidades](#-funcionalidades)
+- [Funcionalidades](#-user-content-funcionalidades)
 - [Demonstração da aplicação](#-demonstração-da-aplicação)
 - [Como executar o projeto](#-como-executar-o-projeto)
   - [Pré-requisitos](#pré-requisitos)
