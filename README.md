@@ -3,7 +3,7 @@
 </h1>
 
 <h3 align="center">
-    📋 ChatApp é um aplicativo de conversas.
+    ChatApp é um aplicativo de conversas.
 </h3>
 
 <p align="center">
@@ -42,8 +42,8 @@
     - [Rodando o Backend (servidor)](#user-content--rodando-o-backend-servidor)
     - [Rodando a aplicação web (Frontend)](#user-content--rodando-a-aplicação-web-frontend)
 - [Tecnologias](#-tecnologias)
-  - [Website](#-website--react)
-  - [Server](#-server--nodejs)
+  - [Website](#website--react)
+  - [Server](#server--nodejs)
 - [Autor](#-autor)
 - [Licença](#user-content--licença)
 
@@ -51,7 +51,8 @@
 
 ## 💻 Sobre o projeto
 
-Registro de tarefas para ter organização e planejamento ao receber uma lista de afazeres.
+Aplicativo de salas de conversas com comunicação em tempo real através de websockets.
+Totalmente responsivo, possui uma versão adaptada para mobile.
 
 ---
 
@@ -59,22 +60,27 @@ Registro de tarefas para ter organização e planejamento ao receber uma lista d
 
 As seguintes funcionalidades estão disponíveis:
 
-- [x] Os usuários podem se registrar, onde podem:
+- [x] os usuários registrados podem:
 
-  - [x] registrar tarefas
-  - [x] excluir tarefas
-  - [x] concluir tarefas
+  - [x] listar todos os usuários registrados, e se preferir, filtrá-los
+  - [x] iniciar uma conversa com outro usuário e mandar mensagens
 
 ---
 
 ## 🔍 Demonstração da aplicação
 
-A aplicação está hospedada no [Heroku](https://to-do-lisst.herokuapp.com/)
+A aplicação está hospedada no [Heroku](https://chat-pern.herokuapp.com)
 
 ### Web
 
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="to-do-list" title="to-do-list" src="./github/assets/to-do-list.gif" >
+  <img alt="chatapp" title="chatapp" src="./github/assets/chatapp.gif" >
+</p>
+
+### Mobile
+
+<p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
+  <img alt="chatapp-mobile" title="chatapp-mobile" src="./github/assets/chatapp-mobile.gif" >
 </p>
 
 ---
@@ -84,13 +90,14 @@ A aplicação está hospedada no [Heroku](https://to-do-lisst.herokuapp.com/)
 Este projeto é divido em duas partes:
 
 1. Backend (pasta src)
-2. Frontend (pasta frontend)
+2. Frontend (pasta client)
 
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e [Yarn](https://yarnpkg.com/). Além disso,
-será preciso ter uma conta no [MongoDB](https://www.mongodb.com/) para ter acesso ao banco de dados.
+[Git](https://git-scm.com), [Node.js](https://nodejs.org/en/) e [Yarn](https://yarnpkg.com/).
+Além disso, terá que ter o [PostgreSQL](https://www.postgresql.org/download/) para ter
+acesso a um banco de dados próprio.
 
 #### 🎲 Rodando o Backend (servidor)
 
@@ -105,12 +112,20 @@ $ cd chatroom-app
 # Instale as dependências
 $ yarn
 
-# Crie um arquivo .env na raiz seguindo as especificações do arquivo .env.sample
+# Crie um arquivo .env na raiz seguindo as especificações do arquivo sample.env,
+# colocando suas credencias do seu banco de dados
 
-# Execute a aplicação
-$ yarn start
+# Rode as migrações do banco de dados
+$ yarn sequelize db:migrate
 
-# O servidor iniciará na porta:8080 - acesse http://localhost:8080
+# Acesse a pasta src e vá para server.js
+# em cors coloque a origin http://localhost:3000,
+# que será a porta onde o client será hospedado
+
+# Execute a aplicação em modo desenvolvimento
+$ yarn dev
+
+# O servidor iniciará na porta:5000 - acesse http://localhost:5000
 
 ```
 
@@ -120,7 +135,7 @@ $ yarn start
 
 
 # Acesse a pasta do frontend no seu terminal/cmd
-$ cd frontend
+$ cd client
 
 # Instale as dependências
 $ yarn
@@ -142,16 +157,21 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 - **[React Router Dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)**
 - **[dotenv](https://github.com/motdotla/dotenv#readme)**
+- **[Bootstrap](https://getbootstrap.com/)**
+- **[React Icons](https://www.npmjs.com/package/react-icons)**
+- **[Socket.io](https://socket.io/)**
 
-> Veja o arquivo [package.json](https://github.com/lucasfe4nor/chatroom-app/blob/master/frontend/package.json)
+> Veja o arquivo [package.json](https://github.com/lucasfe4nor/chatroom-app/blob/master/client/package.json)
 
 #### Server ([NodeJS](https://nodejs.org/en/))
 
 - **[Express](https://expressjs.com/)**
 - **[CORS](https://expressjs.com/en/resources/middleware/cors.html)**
 - **[dotenv](https://github.com/motdotla/dotenv#readme)**
-- **[Mongoose](https://mongoosejs.com/)**
 - **[JsonWebToken](https://www.npmjs.com/package/jsonwebtoken)**
+- **[Socket.io](https://socket.io/)**
+- **[node-postgres](https://www.npmjs.com/package/pg)**
+- **[Sequelize](https://sequelize.org/master/index.html)**
 - **[BodyParser](https://www.npmjs.com/package/body-parser)**
 - **[bcrypt](https://www.npmjs.com/package/bcrypt)**
 

@@ -289,6 +289,7 @@ export default function ChatRoom() {
                 className={style.conversation}
               >
                 <div ref={messagesEndRef} className={style.conversationWrapper}>
+                  <div style={{ flex: '1 1 auto' }}></div>
                   {loadingMessages ? (
                     <div className={style.spinner}>
                       <div className="spinner-border" role="status"></div>

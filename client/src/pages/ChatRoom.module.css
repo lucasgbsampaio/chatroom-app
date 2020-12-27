@@ -181,13 +181,12 @@
   height: calc(100% - 128px);
   width: 100%;
   z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
 }
 
 .conversationWrapper {
   height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 20px 60px;
   overflow-x: hidden;
   overflow-y: auto;
