@@ -35,15 +35,15 @@
 <!--ts-->
 
 - [Sobre o projeto](#-sobre-o-projeto)
-- [Funcionalidades](#⚙️-funcionalidades)
+- [Funcionalidades](#%EF%B8%8F-funcionalidades)
 - [Demonstração da aplicação](#-demonstração-da-aplicação)
 - [Como executar o projeto](#-como-executar-o-projeto)
   - [Pré-requisitos](#pré-requisitos)
     - [Rodando o Backend (servidor)](#user-content--rodando-o-backend-servidor)
     - [Rodando a aplicação web (Frontend)](#user-content--rodando-a-aplicação-web-frontend)
 - [Tecnologias](#-tecnologias)
-  - [WebSite](#user-content-website--react)
-  - [Server](#user-content-server--nodejs)
+  - [Website](#-website--react)
+  - [Server](#-server--nodejs)
 - [Autor](#-autor)
 - [Licença](#user-content--licença)
 
@@ -138,7 +138,7 @@ $ yarn start
 
 As seguintes ferramentas foram usadas na construção do projeto:
 
-#### WebSite ([React](https://reactjs.org/))
+#### Website ([React](https://reactjs.org/))
 
 - **[React Router Dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)**
 - **[dotenv](https://github.com/motdotla/dotenv#readme)**
