@@ -7,21 +7,21 @@
 </h3>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/lucasfe4nor/chatroom-app?color=%2304D361">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/lucasgbsampaio/chatroom-app?color=%2304D361">
 
-  <img alt="Repository size" src="https://img.shields.io/github/repo-size/lucasfe4nor/chatroom-app">
+  <img alt="Repository size" src="https://img.shields.io/github/repo-size/lucasgbsampaio/chatroom-app">
 
-  <a href="https://www.twitter.com/lucasfe4nor/">
-    <img alt="Siga no Twitter" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Flucasfe4nor%2Fchatroom-app">
+  <a href="https://www.twitter.com/lucasgbsampaio/">
+    <img alt="Siga no Twitter" src="https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2Flucasgbsampaio%2Fchatroom-app">
   </a>
   
-  <a href="https://github.com/lucasfe4nor/chatroom-app/commits/master">
-    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lucasfe4nor/chatroom-app">
+  <a href="https://github.com/lucasgbsampaio/chatroom-app/commits/master">
+    <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/lucasgbsampaio/chatroom-app">
   </a>
     
    <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
-   <a href="https://github.com/lucasfe4nor/chatroom-app/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/lucasfe4nor/chatroom-app?style=social">
+   <a href="https://github.com/lucasgbsampaio/chatroom-app/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/lucasgbsampaio/chatroom-app?style=social">
   </a>
 
 </p>
@@ -104,7 +104,7 @@ acesso a um banco de dados próprio.
 ```bash
 
 # Clone este repositório
-$ git clone https://github.com/lucasfe4nor/chatroom-app.git
+$ git clone https://github.com/lucasgbsampaio/chatroom-app.git
 
 # Acesse a pasta do projeto no terminal/cmd para ter acesso a raiz da pasta
 $ cd chatroom-app
@@ -161,7 +161,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **[React Icons](https://www.npmjs.com/package/react-icons)**
 - **[Socket.io](https://socket.io/)**
 
-> Veja o arquivo [package.json](https://github.com/lucasfe4nor/chatroom-app/blob/master/client/package.json)
+> Veja o arquivo [package.json](https://github.com/lucasgbsampaio/chatroom-app/blob/master/client/package.json)
 
 #### Server ([NodeJS](https://nodejs.org/en/))
 
@@ -175,13 +175,13 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - **[BodyParser](https://www.npmjs.com/package/body-parser)**
 - **[bcrypt](https://www.npmjs.com/package/bcrypt)**
 
-> Veja o arquivo [package.json](https://github.com/lucasfe4nor/chatroom-app/blob/master/package.json)
+> Veja o arquivo [package.json](https://github.com/lucasgbsampaio/chatroom-app/blob/master/package.json)
 
 ---
 
 ## 👨‍💻 Autor
 
-- **Lucas Sampaio (lucasfe4nor)** - [Twitter](https://twitter.com/lucasfe4nor) - [LinkedIn](https://www.linkedin.com/in/lucasgbsampaio/)
+- **Lucas Sampaio (lucasgbsampaio)** - [Twitter](https://twitter.com/lucasgbsampaio) - [LinkedIn](https://www.linkedin.com/in/lucasgbsampaio/)
 
 ---
 
