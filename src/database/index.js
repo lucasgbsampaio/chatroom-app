@@ -18,6 +18,9 @@ const connection = !isProduction
         timestamps: true,
         underscored: true,
       },
+      dialectOptions: {
+        ssl: true,
+      },
     });
 
 User.init(connection);
