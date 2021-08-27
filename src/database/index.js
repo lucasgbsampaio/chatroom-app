@@ -18,8 +18,12 @@ const connection = !isProduction
         timestamps: true,
         underscored: true,
       },
+      ssl: true,
       dialectOptions: {
-        ssl: true,
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
       },
     });
 
